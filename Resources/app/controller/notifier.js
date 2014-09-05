@@ -15,15 +15,16 @@ Notifier.prototype.init = function(){
 	this.dbUtils.createDb();
 	this.dbUtils.clearTable('todos');
 	console.log(this.dbUtils.getAllTodos());
+	// console.log((new Date('18/30')).getHours());
+	
 	this.models = [todoModel({
 		todo : 'testTodo',
+		doTill : '14:50',
 		done : false
 	})];
-	this.models[0].setItem({
-		todo : 'testTodo',
-		done : false
-	});
-	console.log(this.models[0].getItem());
+	console.log(this.dbUtils.getAllTodos());
+	console.log(this.models.splice(0, 1));
+
 	
 };
 Notifier.prototype.showNewTodo = function(){
@@ -50,9 +51,15 @@ Notifier.prototype.addTodo = function(toDo){
 };
 
 Notifier.prototype.sortTodos = function(){
-
+	var times;
+	for(var i = 0; i < this.models.length; i++){
+		times = this.models[i].doTill.split(':');
+		this.models[i].hours = times[0];
+		this.models[i].minutes = times[1][0];
+	}
+	console.log(this.models);
 	this.models.sort(function(a,b){
-		if(a.hours >= b.hours && a.minutes > b.minutes){
+		if(a.hours <= b.hours && a.minutes < b.minutes){
 			return 1;
 		}
 		else{

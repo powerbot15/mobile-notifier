@@ -2,6 +2,7 @@ function CreateTodoItemModel(newTodo){
 	var todoItem = {
 		todo : newTodo.todo,
 		id : '',
+		doTill:newTodo.doTill,
 		done : newTodo.done,
 		setItem : function(todoObject){
 			this.todo = todoObject.todo;
@@ -18,6 +19,7 @@ function CreateTodoItemModel(newTodo){
 		getItem : function(){
 			return {
 				todo : this.todo,
+				doTill : this.doTill,
 				id : this.id,
 				done : this.done
 			};
@@ -29,6 +31,7 @@ function CreateTodoItemModel(newTodo){
 			db.close();
 		}
 	};
+	todoItem.saveToDatabase();
 	return todoItem;
 }
 

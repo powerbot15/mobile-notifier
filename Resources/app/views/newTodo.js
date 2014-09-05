@@ -84,7 +84,7 @@ function createNewTodoComponent(){
 		this.parent.animate(animation);
 		app.addTodo({
 			todo : todoInput.value,
-			doTill : tillDo.getSelectedRow().getTitle(),
+			doTill : tillDo.getSelectedRow(null).getTitle().split(' ')[2],
 			done : false
 		});
 		todoInput.value = '';
