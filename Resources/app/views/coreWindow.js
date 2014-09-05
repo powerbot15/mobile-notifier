@@ -8,7 +8,8 @@ function createMainWindow(){
 	}),
 	clocks = clocksCreate(),
 	todo = newTodo();
-	mainWindow.add([clocks, todo]);
+	mainWindow.add(clocks);
+	mainWindow.add(todo);
 	mainWindow.addEventListener('androidback', function(event){
 		mainWindow.close();
 	});

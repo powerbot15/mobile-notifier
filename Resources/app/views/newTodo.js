@@ -18,7 +18,7 @@ function createNewTodoComponent(){
 	var newTodo = Ti.UI.createView({
 		top : '50px',
 		width : '100%',
-		height : '60px',
+		height : '90px',
 		layout : 'horizontal'
 	}),
 	todoInput = Ti.UI.createTextField({
@@ -32,8 +32,10 @@ function createNewTodoComponent(){
 		title:'Add'
 	});
 	
-	tillDo.add(createOptions());
-	newTodo.add([todoInput, tillDo, createTodo]);
+	tillDo.add(createOptions([1,2,3,4]));
+	newTodo.add(todoInput);
+	newTodo.add(tillDo);
+	newTodo.add(createTodo);
 	
 	return newTodo;
 }

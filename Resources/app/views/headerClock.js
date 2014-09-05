@@ -25,7 +25,7 @@ function createHeaderClock(){
 	headerClock = Ti.UI.createView({
 		width : '100%',
 		top : 0,
-		height : '40px'
+		height : '50px'
 	});
 	clocks = Ti.UI.createLabel({
 		text : convertTimeToString(time)
