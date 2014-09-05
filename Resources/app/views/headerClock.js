@@ -28,7 +28,8 @@ function createHeaderClock(){
 		height : '50px'
 	});
 	clocks = Ti.UI.createLabel({
-		text : convertTimeToString(time)
+		text : convertTimeToString(time),
+		color : '#FFFFFF'
 	});
 	headerClock.add(clocks);
 	setInterval(function(){

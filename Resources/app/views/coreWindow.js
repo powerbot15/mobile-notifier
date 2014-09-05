@@ -1,5 +1,6 @@
 var clocksCreate = require('../views/headerClock'),
-	newTodo = require('../views/newTodo');
+	newTodo = require('../views/newTodo'),
+	navBar = require('../views/menuBar');
 function createMainWindow(){
 
 	var mainWindow = Ti.UI.createWindow({
@@ -7,9 +8,11 @@ function createMainWindow(){
 			backgroundColor:'#000044'
 	}),
 	clocks = clocksCreate(),
-	todo = newTodo();
+	navbar = navBar();
+	// todo = newTodo();
 	mainWindow.add(clocks);
-	mainWindow.add(todo);
+	mainWindow.add(navbar);
+	// mainWindow.add(todo);
 	mainWindow.addEventListener('androidback', function(event){
 		mainWindow.close();
 	});

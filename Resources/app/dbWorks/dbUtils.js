@@ -8,6 +8,7 @@ function createDbUtils(){
 				todosParsed.push({
 					id : todos.fieldByName('id'),
 					text : todos.fieldByName('text'),
+					doTill : todos.fieldByName('doTill'),
 					done : todos.fieldByName('done'),
 				});
 		        todos.next();
@@ -18,7 +19,8 @@ function createDbUtils(){
 		},
 		createDb : function(){
 			var db = Ti.Database.open('ToDoList');
-			db.execute('CREATE TABLE IF NOT EXISTS todos(id INTEGER PRIMARY KEY AUTOINCREMENT, todo TEXT, done BOOLEAN);');
+			db.execute('DROP TABLE IF EXISTS todos');
+			db.execute('CREATE TABLE IF NOT EXISTS todos(id INTEGER PRIMARY KEY AUTOINCREMENT, todo TEXT, doTill STRING, done BOOLEAN);');
 			db.close();
 		},
 		clearTable : function(tableName){
