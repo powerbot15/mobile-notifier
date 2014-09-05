@@ -12,13 +12,15 @@ Notifier.prototype.init = function(){
 	this.mainWin.open();
 	this.dbUtils = dbUtils();
 	this.dbUtils.createDb();
+	this.dbUtils.clearTable('todos');
 	console.log(this.dbUtils.getAllTodos());
-	// this.models = [todoModel()];
-	// this.models[0].setItem({
-		// text : 'testTodo',
-		// done : false
-	// });
-	// console.log(this.models[0].getItem());
+	this.models = [todoModel()];
+	this.models[0].setItem({
+		todo : 'testTodo',
+		done : false
+	});
+	console.log(this.models[0].getItem());
+	
 };
 
 module.exports = Notifier;

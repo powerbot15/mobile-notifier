@@ -1,31 +1,30 @@
 function CreateTodoItemModel(){
 	var todoItem = {
-		text : '',
+		todo : '',
 		id : '',
 		done : false,
 		setItem : function(todoObject){
-			this.text = todoObject.text;
+			this.todo = todoObject.todo;
 			this.done = todoObject.done;
 			this.saveToDatabase();
 		},
 		setItemDone : function(){
 			var db = Ti.Database.open('ToDoList');
 			db.execute('UPDATE todos SET done=? WHERE id=?',this.done, this.id);
-			this.id = db.lastInsertRowID;
+			this.id = db.lastInsertRowId;
 			db.close();
 		},
 		getItem : function(){
 			return {
-				text : this.text,
+				todo : this.todo,
 				id : this.id,
 				done : this.done
 			};
 		},
 		saveToDatabase : function(){
 			var db = Ti.Database.open('ToDoList');
-			db.execute('INSERT INTO todos (text,done) VALUES (?,?);', this.text, this.done);
-			this.id = db.lastInsertRowID;
-			console.log(db.lastInsertRowID);
+			db.execute('INSERT INTO todos (todo,done) VALUES (?,?);', this.todo, this.done);
+			this.id = db.lastInsertRowId;
 			db.close();
 		}
 	};

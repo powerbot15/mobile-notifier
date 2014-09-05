@@ -13,6 +13,7 @@ function createDbUtils(){
 		        todos.next();
 			}
 			todos.close();
+			db.close();
 			return todosParsed;
 		},
 		createDb : function(){
@@ -22,7 +23,8 @@ function createDbUtils(){
 		},
 		clearTable : function(tableName){
 			var db = Ti.Database.open('ToDoList');
-			db.execute('DELETE FROM ?', tableName);
+			db.execute('DELETE FROM ' + tableName);
+			db.close();
 		}
 		
 	};
