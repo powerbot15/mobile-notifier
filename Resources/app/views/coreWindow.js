@@ -1,5 +1,5 @@
 var clocksCreate = require('../views/headerClock'),
-	newTodo = require('../views/newTodo'),
+	
 	navBar = require('../views/menuBar');
 function createMainWindow(){
 

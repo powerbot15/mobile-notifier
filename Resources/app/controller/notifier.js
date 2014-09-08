@@ -47,7 +47,7 @@ Notifier.prototype.addTodo = function(toDo){
 	// this.models.push(newTodo);
 	// newTodo.saveToDatabase();
 	this.getSortedTodos();
-	this.RenderTodos();
+	this.renderTodos();
 };
 Notifier.prototype.renderTodos = function(){
 	this.mainWin.add(todoList(this.models));
