@@ -1,7 +1,8 @@
 var MainWin = require('../views/coreWindow'),
 	dbUtils = require('../dbWorks/dbUtils'),
 	todoModel = require('../models/todoModel'),
-	createNewTodo = require('../views/newTodo'); 
+	createNewTodo = require('../views/newTodoForm'),
+	todoList = require('../views/todoList'); 
 
 function Notifier(){
 	this.name = 'Notification controller';
@@ -13,17 +14,17 @@ Notifier.prototype.init = function(){
 	this.mainWin.open();
 	this.dbUtils = dbUtils();
 	this.dbUtils.createDb();
-	this.dbUtils.clearTable('todos');
-	console.log(this.dbUtils.getAllTodos());
+	// this.dbUtils.clearTable('todos');
+	// console.log(this.dbUtils.getAllTodos());
 	// console.log((new Date('18/30')).getHours());
 	
 	this.models = [todoModel({
 		todo : 'testTodo',
-		doTill : '14:50',
+		doTill : new Date(),
 		done : false
 	})];
-	console.log(this.dbUtils.getAllTodos());
-	console.log(this.models.splice(0, 1));
+	// console.log(this.dbUtils.getAllTodos());
+	// console.log(this.models.splice(0, 1));
 
 	
 };
@@ -42,31 +43,25 @@ Notifier.prototype.showNewTodo = function(){
 };
 
 Notifier.prototype.addTodo = function(toDo){
-	var newTodo = todoModel(toDo);
-	this.models.push(newTodo);
-	newTodo.saveToDatabase();
-	this.sortTodos();
-	console.log(this.models);
-	// this.renderTodos()
+	var newTodo = todoModel(toDo, true);
+	// this.models.push(newTodo);
+	// newTodo.saveToDatabase();
+	this.getSortedTodos();
+	this.RenderTodos();
 };
-
-Notifier.prototype.sortTodos = function(){
-	var times;
-	for(var i = 0; i < this.models.length; i++){
-		times = this.models[i].doTill.split(':');
-		this.models[i].hours = times[0];
-		this.models[i].minutes = times[1][0];
+Notifier.prototype.renderTodos = function(){
+	this.mainWin.add(todoList(this.models));
+	// for(var i = 0; i < this.models.length; i++){
+// 		
+	// }
+};
+Notifier.prototype.getSortedTodos = function(){
+	var todos = [];
+	todos = this.dbUtils.getAllTodos();
+	console.log(todos);
+	this.models = [];
+	for (var i = 0; i < todos.length; i++){
+		this.models.push(todoModel(todos[i], false));
 	}
-	console.log(this.models);
-	this.models.sort(function(a,b){
-		if(a.hours <= b.hours && a.minutes < b.minutes){
-			return 1;
-		}
-		else{
-			return -1;
-		}
-		return 0;
-	});
-	
 };
 module.exports = Notifier;

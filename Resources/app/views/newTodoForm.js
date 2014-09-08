@@ -4,12 +4,16 @@ function createOptions(){
 		hoursCur = date.getHours() + 1,
 		halfHour = false,
 		times = [];
-	
+	// console.log(date.toDateString());
 	while(hoursCur < 24){
+		
 		times.push({
-			hours : hoursCur,
-			minutes : halfHour ? 30 : '00'
+			date : new Date(date.getFullYear(), date.getMonth(), date.getDate(), hoursCur, halfHour ? 30 : 0)
 		});
+		// {
+			// hours : hoursCur,
+			// minutes : halfHour ? 30 : '00'
+		// });
 		if(halfHour){
 			hoursCur++;	
 		}
@@ -20,11 +24,10 @@ function createOptions(){
 	for(var i = 0; i < times.length; i++){
 		options.push(
 			Ti.UI.createPickerRow({
-				title : 'Do till ' + times[i].hours + ':' + times[i].minutes,
+				title : 'Do till ' + times[i].date.getHours() + ':' + times[i].date.getMinutes(),
 				height:'40px',
 				color : '#333333',
-				hours:times[i].hours,
-				minutes:times[i].minutes
+				doTill:times[i].date
 			})
 		);
 	}
@@ -47,7 +50,7 @@ function createNewTodoComponent(){
 		width:'90%',
 		top:'10px',
 		backgroundColor : '#1B54D0',
-		hintText:'Type Your Todo',
+		hintText:'Type Your Todo Here',
 		borderColor:'#1B54D0',
 		borderRadius:'10px',
 		borderWidth:'1px',
@@ -84,7 +87,7 @@ function createNewTodoComponent(){
 		this.parent.animate(animation);
 		app.addTodo({
 			todo : todoInput.value,
-			doTill : tillDo.getSelectedRow(null).getTitle().split(' ')[2],
+			doTill : tillDo.getSelectedRow(null).doTill,
 			done : false
 		});
 		todoInput.value = '';

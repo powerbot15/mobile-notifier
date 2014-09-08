@@ -1,7 +1,7 @@
-function CreateTodoItemModel(newTodo){
+function CreateTodoItemModel(newTodo, isNewModel){
 	var todoItem = {
 		todo : newTodo.todo,
-		id : '',
+		id : newTodo.id ? newTodo.id : 0, 
 		doTill:newTodo.doTill,
 		done : newTodo.done,
 		setItem : function(todoObject){
@@ -31,7 +31,7 @@ function CreateTodoItemModel(newTodo){
 			db.close();
 		}
 	};
-	todoItem.saveToDatabase();
+	if(isNewModel){todoItem.saveToDatabase();}
 	return todoItem;
 }
 
