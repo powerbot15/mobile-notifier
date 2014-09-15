@@ -1,3 +1,4 @@
+var todoTime;
 function createOptions(){
 	var options = [],
 		date = new Date(),
@@ -40,6 +41,7 @@ function createOptions(){
 }
 
 function createNewTodoComponent(){
+	 
 	var newTodo = Ti.UI.createView({
 		top : '150px',
 		left : '101%',
@@ -49,7 +51,8 @@ function createNewTodoComponent(){
 		// backgroundColor:'green',
 		borderRadius : '10px',
 		// height : '90px',
-		layout : 'vertical'
+		layout : 'vertical',
+		zIndex:100
 	}),
 	todoInput = Ti.UI.createTextField({
 		width:'90%',
@@ -73,16 +76,16 @@ function createNewTodoComponent(){
 	}),
 	pickerContainer = Ti.UI.createView({
 		width:'100%',
-		height:'150px'
+		height:'150px',
+		backgroundColor:'#330099',
 	}),
 	picker = Ti.UI.createPicker({
 	    type : Ti.UI.PICKER_TYPE_TIME,
 	    selectionIndicator : true,
 	    value : new Date(),
-	    backgroundColor:'#330099',
 	    top:0,
 	    bottom:0,
-	    height:'100px'
+	    height:'150px'
 	    // bottom : 0
 	    
 	}),
@@ -98,8 +101,22 @@ function createNewTodoComponent(){
 		borderWidth:'1px'
 
 	});
-	
-	tillDo.add(createOptions());
+	picker.addEventListener('change', function(e) {
+ 
+	    todoTime = e.value;
+	    // Ti.API.info('Date: '+d.toString());
+	    // Ti.API.info('Epoch: '+d.getTime());
+	    Ti.API.info('Hours: ' +todoTime.getHours());
+	    Ti.API.info('Minutes: '+todoTime.getMinutes());
+ 
+	});
+	console.log(picker.getChildren());
+	// picker.getChildren().forEach(function(element, index){
+		// console.log(element);
+		// element.setBackgroundColor('#BBBBBB');	
+		// element.setColor('#000000');
+	// });
+	// tillDo.add(createOptions());
 	pickerContainer.add(picker);
 	newTodo.add(todoInput);
 	// newTodo.add(tillDo);
@@ -111,10 +128,11 @@ function createNewTodoComponent(){
 		// animation.backgroundColor = 'black';
 		animation.duration = 500;
 		animation.left = '101%';
+		
 		this.parent.animate(animation);
 		app.addTodo({
 			todo : todoInput.value,
-			doTill : tillDo.getSelectedRow(null).doTill,
+			doTill : todoTime.toDateString(),//tillDo.getSelectedRow(null).doTill,
 			done : false
 		});
 		todoInput.value = '';

@@ -12,6 +12,7 @@ Notifier.prototype.init = function(){
 	console.log('Notifier started');
 	this.mainWin = MainWin();
 	this.mainWin.open();
+	this.firstLoad = true;
 	this.dbUtils = dbUtils();
 	this.dbUtils.createDb();
 	// this.dbUtils.clearTable('todos');
@@ -43,6 +44,7 @@ Notifier.prototype.showNewTodo = function(){
 };
 
 Notifier.prototype.addTodo = function(toDo){
+	console.log(toDo);
 	var newTodo = todoModel(toDo, true);
 	// this.models.push(newTodo);
 	// newTodo.saveToDatabase();
@@ -50,7 +52,14 @@ Notifier.prototype.addTodo = function(toDo){
 	this.renderTodos();
 };
 Notifier.prototype.renderTodos = function(){
-	this.mainWin.remove(this.mainWin.getChildren().length - 1);
+	var winChildren = this.mainWin.getChildren();
+	if(!this.firstLoad){
+		this.mainWin.remove(winChildren[winChildren.length - 1]);	
+	}
+	else{
+		this.firstLoad = false;
+	}
+	
 	this.mainWin.add(todoList(this.models));
 	// for(var i = 0; i < this.models.length; i++){
 // 		

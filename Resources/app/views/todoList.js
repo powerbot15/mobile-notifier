@@ -2,7 +2,11 @@ function createTodoList(items){
 	
 	if(!items.length){return;}
 	
-	var listView = Ti.UI.createListView(),
+	var listView = Ti.UI.createListView({
+		top:'120px',
+		layout:'vertical',
+		backgroundColor:'#330000'
+	}),
 	tasks = [];
 
 	for (var i = 0; i < items.length; i++){
@@ -27,13 +31,15 @@ function createTodoList(items){
 	            title: tasks[i].todo,
 	            // image: tasks[i].icon,
 	            accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE,
-	            color: 'black',
+	            color: 'white',
 	            height:'40px'
 	        }
 	    });
 	}
 	
-	var section = Ti.UI.createListSection();
+	var section = Ti.UI.createListSection({
+		
+	});
 	section.setItems(data);
 	listView.sections = [section];
 	listView.clear = function(){

@@ -1,6 +1,7 @@
 function createMenuBar(){
 	var bar = Ti.UI.createButton({
-			width : '95%',
+			top:'60px',			
+			idth : '95%',
 			height : '50px',
 			backgroundColor : '#008800',
 			title : 'New ToDo',

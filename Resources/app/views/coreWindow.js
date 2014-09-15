@@ -4,7 +4,7 @@ var clocksCreate = require('../views/headerClock'),
 function createMainWindow(){
 
 	var mainWindow = Ti.UI.createWindow({
-			layout:'vertical',
+			// layout:'vertical',
 			backgroundColor:'#000044'
 	}),
 	clocks = clocksCreate(),
