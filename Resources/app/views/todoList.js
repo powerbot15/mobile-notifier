@@ -23,11 +23,12 @@ function createTodoList(items){
 	for (var i = 0; i < tasks.length; i++) {
 	    data.push(
 	        { properties: {
-	            itemId: tasks[i].id,
+	            index: i,
 	            title: tasks[i].todo,
 	            // image: tasks[i].icon,
 	            accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE,
-	            color: 'black'
+	            color: 'black',
+	            height:'40px'
 	        }
 	    });
 	}

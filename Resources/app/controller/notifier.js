@@ -50,6 +50,7 @@ Notifier.prototype.addTodo = function(toDo){
 	this.renderTodos();
 };
 Notifier.prototype.renderTodos = function(){
+	this.mainWin.remove(this.mainWin.getChildren().length - 1);
 	this.mainWin.add(todoList(this.models));
 	// for(var i = 0; i < this.models.length; i++){
 // 		

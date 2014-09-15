@@ -3,7 +3,8 @@ function createOptions(){
 		date = new Date(),
 		hoursCur = date.getHours() + 1,
 		halfHour = false,
-		times = [];
+		times = [],
+		hours, minutes;
 	// console.log(date.toDateString());
 	while(hoursCur < 24){
 		
@@ -22,9 +23,12 @@ function createOptions(){
 	}
 	
 	for(var i = 0; i < times.length; i++){
+		hours = times[i].date.getHours();
+		minutes = times[i].date.getMinutes();
+		// console.log(hours + ' ' + minutes);
 		options.push(
 			Ti.UI.createPickerRow({
-				title : 'Do till ' + times[i].date.getHours() + ':' + times[i].date.getMinutes(),
+				title : 'Do till ' + hours < 10 ? '0' + hours : hours + ':' + minutes < 10 ? '0' + minutes : minutes,
 				height:'40px',
 				color : '#333333',
 				doTill:times[i].date
@@ -40,8 +44,9 @@ function createNewTodoComponent(){
 		top : '150px',
 		left : '101%',
 		width : '100%',
-		height : '300px',
+		height : '350px',
 		backgroundColor:'#EFF1E4',
+		// backgroundColor:'green',
 		borderRadius : '10px',
 		// height : '90px',
 		layout : 'vertical'
@@ -58,14 +63,34 @@ function createNewTodoComponent(){
 	tillDo = Ti.UI.createPicker({
 		top:'10px',
 		width:'60%',
-		// backgroundColor : '#1B54D0',
-		borderColor:'#1B54D0',
-		borderWidth:'1px'
+		backgroundColor : '#3300AA',
+		// borderColor:'#1B54D0',
+		borderWidth:'1px',
+		top:'50px',
+		height:'50px',
+		
 
 	}),
+	pickerContainer = Ti.UI.createView({
+		width:'100%',
+		height:'150px'
+	}),
+	picker = Ti.UI.createPicker({
+	    type : Ti.UI.PICKER_TYPE_TIME,
+	    selectionIndicator : true,
+	    value : new Date(),
+	    backgroundColor:'#330099',
+	    top:0,
+	    bottom:0,
+	    height:'100px'
+	    // bottom : 0
+	    
+	}),
+	
 	createTodo = Ti.UI.createButton({
 		top : '10px',
 		width:'60%',
+		height:'60px',
 		title:'Add',
 		backgroundColor : '#1B54D0',
 		backgroundSelectedColor : '#3B54D0',
@@ -75,8 +100,10 @@ function createNewTodoComponent(){
 	});
 	
 	tillDo.add(createOptions());
+	pickerContainer.add(picker);
 	newTodo.add(todoInput);
-	newTodo.add(tillDo);
+	// newTodo.add(tillDo);
+	newTodo.add(pickerContainer);
 	newTodo.add(createTodo);
 	
 	createTodo.addEventListener('click', function(event){
