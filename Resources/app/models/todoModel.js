@@ -26,7 +26,7 @@ function CreateTodoItemModel(newTodo, isNewModel){
 		},
 		saveToDatabase : function(){
 			var db = Ti.Database.open('ToDoList');
-			db.execute('INSERT INTO todos (todo, doTill, done) VALUES (?, ?, ?);', this.todo, this.doTill, this.done);
+			db.execute('INSERT INTO todos (todo, doTill, done) VALUES (?, ?, ?);', this.todo, new Date(this.doTill), this.done);
 			this.id = db.lastInsertRowId;
 			db.close();
 		}

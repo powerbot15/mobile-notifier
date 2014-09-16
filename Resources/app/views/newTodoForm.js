@@ -86,7 +86,8 @@ function createNewTodoComponent(){
 	    value : new Date(),
 	    top:0,
 	    bottom:0,
-	    height:'100px'
+	    height:'100px',
+	    useSpinner:true
 	    // bottom : 0
 	    
 	}),
@@ -103,7 +104,7 @@ function createNewTodoComponent(){
 
 	});
 	picker.addEventListener('change', function(e) {
- 
+		 
 	    todoTime = e.value;
 	    // Ti.API.info('Date: '+d.toString());
 	    // Ti.API.info('Epoch: '+d.getTime());
@@ -129,7 +130,6 @@ function createNewTodoComponent(){
 		// animation.backgroundColor = 'black';
 		animation.duration = 500;
 		animation.left = '101%';
-		
 		this.parent.animate(animation);
 		app.addTodo({
 			todo : todoInput.value,

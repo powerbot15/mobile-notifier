@@ -5,7 +5,7 @@ function createTodoList(items){
 	var scrollView = Ti.UI.createScrollView({
 		top:'120px',
 		layout:'vertical',
-		backgroundColor:'#330000'
+		backgroundColor:'#D2D190'
 	}),
 	tasks = [];
 
@@ -23,8 +23,7 @@ function createTodoList(items){
 	    // {id: 'doggie', name: 'Walk the Dog', icon: 'doggie.png'}
 	// ];
 	
-	var data = [];
-	
+
 	for (var i = 0; i < tasks.length; i++) {
 		var todoLeastTime = {
 			hours : (new Date(tasks[i].doTill)).getHours() - app.timeNow.getHours(),
@@ -32,6 +31,8 @@ function createTodoList(items){
 		},
 		shortNoticeColor,
 		shortNoticeImage;
+		alert(app.timeNow.getHours() + ' app');
+		alert((new Date(tasks[i].doTill)).getHours() + ' db');
 		if(todoLeastTime.hours == 0 && todoLeastTime.minutes < 30){
 			shortNoticeColor = '#E57066';
 			shortNoticeImage = 'img/alert1.png';
