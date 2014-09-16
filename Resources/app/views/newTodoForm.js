@@ -62,6 +62,7 @@ function createNewTodoComponent(){
 		borderColor:'#1B54D0',
 		borderRadius:'10px',
 		borderWidth:'1px',
+		maxLength:150
 	}),
 	tillDo = Ti.UI.createPicker({
 		top:'10px',
@@ -85,7 +86,7 @@ function createNewTodoComponent(){
 	    value : new Date(),
 	    top:0,
 	    bottom:0,
-	    height:'150px'
+	    height:'100px'
 	    // bottom : 0
 	    
 	}),
@@ -110,7 +111,7 @@ function createNewTodoComponent(){
 	    Ti.API.info('Minutes: '+todoTime.getMinutes());
  
 	});
-	console.log(picker.getChildren());
+	console.log(picker.children);
 	// picker.getChildren().forEach(function(element, index){
 		// console.log(element);
 		// element.setBackgroundColor('#BBBBBB');	
@@ -132,7 +133,7 @@ function createNewTodoComponent(){
 		this.parent.animate(animation);
 		app.addTodo({
 			todo : todoInput.value,
-			doTill : todoTime.toDateString(),//tillDo.getSelectedRow(null).doTill,
+			doTill : todoTime,//.toDateString(),//tillDo.getSelectedRow(null).doTill,
 			done : false
 		});
 		todoInput.value = '';

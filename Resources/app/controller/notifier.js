@@ -19,11 +19,7 @@ Notifier.prototype.init = function(){
 	// console.log(this.dbUtils.getAllTodos());
 	// console.log((new Date('18/30')).getHours());
 	
-	this.models = [todoModel({
-		todo : 'testTodo',
-		doTill : new Date(),
-		done : false
-	})];
+	this.models = [];
 	// console.log(this.dbUtils.getAllTodos());
 	// console.log(this.models.splice(0, 1));
 

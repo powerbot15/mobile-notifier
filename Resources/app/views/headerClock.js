@@ -35,6 +35,7 @@ function createHeaderClock(){
 	setInterval(function(){
 		var curTime = new Date();
 		clocks.setText(convertTimeToString(curTime));
+		app.timeNow = curTime;
 	}, 1000);
 	return headerClock;
 }
